@@ -7,15 +7,23 @@ class SessionsController < ApplicationController
     if @user
       session[:user_id] = @user.id
         render json: {
-          status :success,
+          status: :success,
           logged_in: true,
-          user: @user
+          user: @user,
         } 
       else 
         render json: {
           status: 401
         }
     end 
+  end 
+
+  def logged_in
+    
+  end 
+
+  def logout
+
   end 
 
 end 
