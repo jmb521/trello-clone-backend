@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 2021_02_20_203629) do
   create_table "lists", force: :cascade do |t|
     t.string "name"
     t.string "content"
-    t.bigint "baord_id"
+    t.bigint "board_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["baord_id"], name: "index_lists_on_baord_id"
+    t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
   create_table "users", force: :cascade do |t|
