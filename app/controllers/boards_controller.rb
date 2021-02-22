@@ -1,10 +1,16 @@
 class BoardsController < ApplicationController
     before_action :set_board, only: [:show, :update, :destroy]
     def index
-        @boards = current_user.boards
-        render json: {
-            boards: @boards
-        }
+        @boards = Board.all
+        if @boards
+            render json: {
+                boards: @boards
+            }
+        else
+            render json: {
+                errors: "You are not currently signed in"
+            }
+        end
     end
 
     def show
@@ -20,6 +26,7 @@ class BoardsController < ApplicationController
     end
     
     def create
+        binding.pry
         @board = Board.create(board_params)
         if @board.valid?
             render json: {
