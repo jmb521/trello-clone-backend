@@ -1,9 +1,6 @@
 class CardsController < ApplicationController
-    before_action :set_card, only: [:update, :destroy]
-    def index
-        
-
-    end
+    before_action :set_card, only: [:update, :destroy, :show]
+    
     def create
         @card = Card.create(card_params)
         if @card.valid?
@@ -32,8 +29,35 @@ class CardsController < ApplicationController
     end
 
     def destroy
-        #do we want to use this or just remove from view?
+        
 
+    end
+
+    def show
+        if @card
+            render json: {
+                card: @card
+            }
+        else
+            render json: {
+                errors: "Card not found"
+            }
+        end
+    end
+
+    def index
+        if params[:list_id]
+            @list = List.find_by(id: params[:list_id])
+            if @list
+                render json: {
+                    cards: @list.cards
+                }
+            else
+                render json: {
+                    errors: "List not found"
+                }
+            end
+        end
     end
 
     private
