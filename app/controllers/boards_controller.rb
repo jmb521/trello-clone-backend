@@ -26,7 +26,7 @@ class BoardsController < ApplicationController
     end
     
     def create
-        binding.pry
+        
         @board = Board.create(board_params)
         if @board.valid?
             render json: {
