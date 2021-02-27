@@ -30,7 +30,16 @@ class CardsController < ApplicationController
 
     def destroy
         
-
+        if @card && @card.list.board.user == @current_user
+            render json: {
+                card: @card, 
+                message: "Card successfully deleted."
+            }
+        else
+            render json: {
+                errors: "You aren't authorized to delete this card"
+            }
+        end
     end
 
     def show
